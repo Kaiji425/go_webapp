@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            text-align: left;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .message.error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .token {
+            margin-top: 20px;
+            word-wrap: break-word; /* Break long text */
+            white-space: normal; /* Allow wrapping */
+        }
+        .time {
+            margin-top: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{.Username}}</h2>
+        <div>
+            <p><strong>User ID:</strong> {{.UserID}}</p>
+            <p><strong>Password:</strong> {{.Password}}</p>
+        </div>
+
+        {{if .Error}}
+            <div class="message error">{{.Error}}</div>
+        {{end}}
+
+        <form action="/update-password" method="POST">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <button type="submit">Update Password</button>
+        </form>
+
+        <a href="/logout">Logout</a>
+
+        <div class="token"><strong>JWT:</strong> {{.Token}}</div>
+        <div class="time" id="current-time">Current time: </div>
+    </div>
+
+    <script>
+        var conn = new WebSocket("ws://" + window.location.host + "/ws");
+        conn.onmessage = function(event) {
+            document.getElementById("current-time").innerText = "Current time: " + event.data;
+        };
+    </script>
+</body>
+</html>

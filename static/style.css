@@ -1,0 +1,31 @@
+/* static/style.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.center {
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+input, button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 8px;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+

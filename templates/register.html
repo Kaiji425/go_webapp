@@ -1,0 +1,98 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7; /* 背景顏色 */
+        }
+        .center {
+            text-align: center;
+            max-width: 400px;
+            border: 1px solid #ccc; /* 邊框顏色 */
+            padding: 30px; /* 增加內部填充 */
+            border-radius: 10px; /* 圓角 */
+            background-color: white; /* 白色背景 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 陰影 */
+            transition: transform 0.3s; /* 鼠標懸停效果 */
+        }
+        .center:hover {
+            transform: translateY(-5px); /* 懸停效果 */
+        }
+        h2 {
+            margin-bottom: 20px; /* 標題底部間距 */
+            color: #333; /* 標題顏色 */
+        }
+        p.success {
+            color: green; /* 成功消息顏色 */
+        }
+        p.error {
+            color: red; /* 錯誤消息顏色 */
+        }
+        label {
+            display: block; /* 標籤顯示為塊 */
+            margin: 10px 0 5px; /* 標籤間距 */
+            text-align: left; /* 左對齊 */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* 寬度100% */
+            padding: 10px; /* 內部填充 */
+            border: 1px solid #ccc; /* 邊框 */
+            border-radius: 5px; /* 圓角 */
+            margin-bottom: 15px; /* 下方間距 */
+            box-sizing: border-box; /* 包含內部填充和邊框 */
+        }
+        button {
+            width: 100%; /* 寬度100% */
+            padding: 10px; /* 內部填充 */
+            background-color: #007BFF; /* 按鈕背景顏色 */
+            color: white; /* 字體顏色 */
+            border: none; /* 無邊框 */
+            border-radius: 5px; /* 圓角 */
+            cursor: pointer; /* 鼠標樣式 */
+            transition: background-color 0.3s; /* 背景顏色變化 */
+        }
+        button:hover {
+            background-color: #0056b3; /* 懸停時顏色變化 */
+        }
+        a {
+            display: block; /* 鏈接顯示為塊 */
+            margin-top: 10px; /* 上方間距 */
+            text-decoration: none; /* 無下劃線 */
+            color: #007BFF; /* 鏈接顏色 */
+            text-align: center; /* 中央對齊 */
+        }
+        a:hover {
+            text-decoration: underline; /* 懸停時下劃線 */
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h2>Register</h2>
+        {{if .Message}}
+            <p class="{{if eq .Message "Registration successful! You can now log in."}}success{{else}}error{{end}}">
+                {{.Message}}
+            </p>
+        {{end}}
+        <form action="/register" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login here</a></p>
+    </div>
+</body>
+</html>
