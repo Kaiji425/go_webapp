@@ -8,7 +8,7 @@
 - 使用者資料的 CRUD 操作
 
 ## 安裝與運行
-下載並運行此應用程式：
+安裝docker環境後下載並運行此應用程式：
 ```bash
 docker pull kaiji425/myapp
 docker run -p 8080:8080 kaiji425/myapp
